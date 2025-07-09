@@ -1,15 +1,16 @@
-<h2>Available Courses</h2>
-<div class="course-item">
-    <h3>Introduction to Angular</h3>
-    <p>Learning angular in this course.</p>
-    <p>100</p>
-    <p>02-01-2025</p>
-    <button>View details</button>
-</div>
-<div class="course-item">
-    <h3>Advanced Angular</h3>
-    <p>Take your Angular skills to the next level.</p>
-    <p>100</p>
-    <p>02-01-2025</p>
-    <button>View details</button>
+<h2>{{ title }}</h2>
+<div *ngFor="let course of courses" class="course-item">
+  <h3>Title: {{ course.title }}</h3>
+  <p>Description: {{ course.description }}</p>
+  <p>Price: {{ course.price }}'$'</p>
+  <p>Duration: {{ course.duration }}</p>
+  <div [hidden]="!course.soldOut">Sold Out</div>
+  <!-- <img [ngStyle]="{'border': course.soldOut ? '2px solid gray' : 'none'}" [src]="course.img" [alt]="course.title + ' icon'" style="width: 60px; height: auto;" /> -->
+  <img [src]="course.img" [alt]="course.title + ' icon'" style="width: 60px; height: auto;" />
+  @if (course.price < 50) {
+    <p style="color: rgb(2, 141, 55);">Special Price!</p>
+  } @else {
+    <p style="color: rgb(94, 1, 52);">This course is an Advanced Course.</p>
+  }
+  <button (click)="viewDetails(course)">View details</button>
 </div>
